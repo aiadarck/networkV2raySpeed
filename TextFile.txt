@@ -1,0 +1,79 @@
+
+The training video is on our YouTube channel
+link : 
+        https://www.youtube.com/@AIADARCK
+
+CODEs:
+
+1)
+Inestall BBR:
+
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+
+order : 
+                1 , 4 ,10
+
+2)
+EDITE CONFING:
+
+ nano /etc/sysctl.conf
+Add the following lines at the bottom of the file after the net.ipv4.tcp_congestion_control = bbr line.
+fs.file-max = 51200
+net.core.rmem_max = 67108864
+net.core.wmem_max = 67108864
+net.core.netdev_max_backlog = 250000
+net.core.somaxconn = 4096
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_fin_timeout = 30
+net.ipv4.tcp_keepalive_time = 1200
+net.ipv4.ip_local_port_range = 10000 65000
+net.ipv4.tcp_max_syn_backlog = 8192
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_mem = 25600 51200 102400
+net.ipv4.tcp_rmem = 4096 87380 67108864
+net.ipv4.tcp_wmem = 4096 65536 67108864
+net.ipv4.tcp_mtu_probing = 1
+Press Ctrl + X to exit and then press Y to save the file, and press enter to keep the same file name.
+Apply the new settings by entering the command below.
+ 
+sysctl -p
+ 
+ 
+2)
+EDITE CONFING:
+
+nano /etc/security/limits.conf
+ 
+Add these lines to the bottom of the file, include the * symbol.
+* soft nofile 51200
+* hard nofile 51200
+Press Ctrl + X to exit and then press Y to save the file, and press enter to keep the same file name.
+Next, enter this command.
+ 
+3)
+EDITE CONFING:
+
+nano /etc/pam.d/common-session
+ 
+Add the following line at the end of the file.
+session required pam_limits.so
+Press Ctrl + X to exit and then press Y to save the file, and press enter to keep the same file name.
+ 
+4)
+ EDITE CONFING:
+
+nano /etc/profile
+ 
+Add the following line at the end of the file.
+ulimit -n 51200
+Finally, type the command below.
+ 
+5)
+RESTART X-UI  V2RAY
+
+x-ui restart
+
+--------------------- AIA DARCK Youtube chanel -----
